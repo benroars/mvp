@@ -25,43 +25,9 @@ html {
 body {
   margin-bottom: 220px;
   -webkit-font-smoothing: antialiased;
-  background-color: #8BBFC1;
-
+  
+  background-image: url('http://www.dynamicevents.ie/wp-content/uploads/2015/08/Bricks-Texture-Black-Background.jpg');
 }
-
-/*.table {
-  font-size: inherit;
-}*/
-
-/*.table > thead > tr > th {
-  padding: 8px 15px;
-  border-bottom: 1px solid #eaeef0;
-}
-
-.table > tbody > tr > td {
-  padding: 8px 15px;
-  border-top: 1px solid #eaeef0;
-}
-
-.panel {
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-
-.panel-default > .panel-heading {
-  color: #333;
-  font-weight: 700;
-  border-color: #edf2f2;
-}
-
-.form-control {
-  border-color: #cfdadc;
-  border-radius: 2px;
-
-  &:focus {
-    border-color: #24b7e4;
-    box-shadow: none;
-  }
-}*/
 
 .thumbnail {
   background-color: #fff; 
@@ -72,10 +38,15 @@ body {
   height: 270px;
   width: 299px;
   margin: auto;
-   border: 2px black solid;
-   border-style: double;
-   box-shadow:0 0 20px blue;
+  border: 2px black solid;
+  border-style: double;
+  box-shadow:0 0 20px blue;
    
+  &:hover {
+    position: relative;
+    bottom: 4px;
+    border-color: #279BAB;
+  }
 }
 
 .thumbnail img {
@@ -137,7 +108,7 @@ label {
 
 h3 {
   font-family: times, Times New Roman, times-roman, georgia, serif;
-  color: #444;
+  color: black;
   margin: 0;
   padding: 0px 0px 6px 0px;
   font-size: 51px;
@@ -145,6 +116,27 @@ h3 {
   letter-spacing: -2px;
   font-weight: bold;
   margin-bottom: 10px;
+  text-shadow:0 0 30px cyan;
 }
+
+input[type=text], textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+     outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #DDDDDD;
+}
+ 
+input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(6, 118, 179, 1);
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid rgba(6, 118, 179, 1);
+}
+
+
 
 

@@ -40,9 +40,9 @@ class Challenge extends React.Component {
         </div>
         <div>
           <h3>{this.state.name}</h3>
-          <h2>{this.state.description}</h2>
-          <button type='submit' className='btn btn-primary btn-lg btn-overide'>Start</button>
-          <button type='submit' className='btn btn-danger btn-lg btn-overide'>Restart</button>
+          <h3>{this.state.description}</h3>
+          <button type='submit' className='btn btn-primary btn-lg'>Start</button>
+          <button type='submit' className='btn btn-danger btn-lg'>Restart</button>
         </div>
       </div>
     );

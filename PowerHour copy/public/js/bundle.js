@@ -512,18 +512,18 @@ var Challenge = function (_React$Component) {
             this.state.name
           ),
           _react2.default.createElement(
-            'h2',
+            'h3',
             null,
             this.state.description
           ),
           _react2.default.createElement(
             'button',
-            { type: 'submit', className: 'btn btn-primary btn-lg btn-overide' },
+            { type: 'submit', className: 'btn btn-primary btn-lg' },
             'Start'
           ),
           _react2.default.createElement(
             'button',
-            { type: 'submit', className: 'btn btn-danger btn-lg btn-overide' },
+            { type: 'submit', className: 'btn btn-danger btn-lg' },
             'Restart'
           )
         )
