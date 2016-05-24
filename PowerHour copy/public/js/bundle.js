@@ -457,12 +457,122 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//This example is has three sections of code. The first is the page-specific code, the second is some helpers, and the third is my customer ATimer class...
+var timerID;
 
-//(1) Page code
-var x = {
-    display: 'none'
-};
+var Challenge = function (_React$Component) {
+    _inherits(Challenge, _React$Component);
+
+    function Challenge(props) {
+        _classCallCheck(this, Challenge);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Challenge).call(this, props));
+
+        _this.state = _ChallengeStore2.default.getState();
+        _this.onChange = _this.onChange.bind(_this);
+        return _this;
+    }
+
+    _createClass(Challenge, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _ChallengeStore2.default.listen(this.onChange);
+            console.log('THE PARAMS', this.props.params);
+            _ChallengeActions2.default.getChallenge(this.props.params.id);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _ChallengeStore2.default.unlisten(this.onChange);
+            $(document.body).removeClass();
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {}
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(type) {
+            if (type === 1) {
+                document.getElementById("CountDownPanel").style.visibility = "visible";
+                doStart();
+            } else {
+
+                timerID.cancel();
+                alert('FAILURE');
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'pull-left container thumbnail' },
+                    _react2.default.createElement('img', { src: this.state.image })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_reactWebcam2.default, { className: 'cam pull-right', height: '400', width: '400' }),
+                    ';',
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        this.state.name
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'spacer' },
+                        '.'
+                    ),
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        this.state.description
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'submit', className: 'btn btn-primary btn-lg', onClick: this.handleClick.bind(this, 1) },
+                        'Start'
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'addwid' },
+                        '...'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'submit', className: 'btn btn-danger btn-lg', onClick: this.handleClick.bind(this, 2) },
+                        'Failure'
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'addwid' },
+                        '...'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'submit', className: 'btn btn-success btn-lg' },
+                        'AddPlayers'
+                    )
+                ),
+                _react2.default.createElement('div', { id: 'CountDownPanel', className: 'pull-left timer' })
+            );
+        }
+    }]);
+
+    return Challenge;
+}(_react2.default.Component);
+
+exports.default = Challenge;
+
+////JS FIDDLE FOUND TIMER IMPLEMENTATION
 
 var WARNING_THRESHOLD = 4 * 60 * 1000; //4 minutes (in milliseconds)
 var _start = new Date().getTime();
@@ -484,7 +594,7 @@ function ActivateCountDown(strContainerID, initialValue) {
         //the ATimer below works with time values in milliseconds
         //the "20" will update display ever 20 milliseconds, as fast as screen refreshes
         $_countDownContainer.removeClass("warn");
-        var timerID = new ATimer(initialValue * 1000, 20, CountDownComplete, CountDownTick);
+        timerID = new ATimer(initialValue * 1000, 20, CountDownComplete, CountDownTick);
         timerID.start();
     }
 
@@ -576,118 +686,6 @@ function ATimer(milliseconds, optionalPeriod, optionalCallback, optionalUpdateCa
         }
     };
 }
-
-var Challenge = function (_React$Component) {
-    _inherits(Challenge, _React$Component);
-
-    function Challenge(props) {
-        _classCallCheck(this, Challenge);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Challenge).call(this, props));
-
-        _this.state = _ChallengeStore2.default.getState();
-        _this.onChange = _this.onChange.bind(_this);
-        return _this;
-    }
-
-    _createClass(Challenge, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            _ChallengeStore2.default.listen(this.onChange);
-            console.log('THE PARAMS', this.props.params);
-            _ChallengeActions2.default.getChallenge(this.props.params.id);
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            _ChallengeStore2.default.unlisten(this.onChange);
-            $(document.body).removeClass();
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps) {}
-    }, {
-        key: 'onChange',
-        value: function onChange(state) {
-            this.setState(state);
-        }
-    }, {
-        key: 'handleClick',
-        value: function handleClick(type) {
-            //type.preventDefault();
-            if (type === 1) {
-                document.getElementById("CountDownPanel").style.visibility = "visible";
-                doStart();
-            } else {
-                document.getElementById("CountDownPanel").style.visibility = "hidden";
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'div',
-                    { className: 'pull-left container thumbnail' },
-                    _react2.default.createElement('img', { src: this.state.image })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_reactWebcam2.default, { className: 'cam pull-right', height: '400', width: '400' }),
-                    ';',
-                    _react2.default.createElement(
-                        'h3',
-                        null,
-                        this.state.name
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'spacer' },
-                        '.'
-                    ),
-                    _react2.default.createElement(
-                        'h3',
-                        null,
-                        this.state.description
-                    ),
-                    _react2.default.createElement(
-                        'button',
-                        { type: 'submit', className: 'btn btn-primary btn-lg', onClick: this.handleClick.bind(this, 1) },
-                        'Start'
-                    ),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'addwid' },
-                        '...'
-                    ),
-                    _react2.default.createElement(
-                        'button',
-                        { type: 'submit', className: 'btn btn-danger btn-lg', onClick: this.handleClick.bind(this, 2) },
-                        'Failure'
-                    ),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'addwid' },
-                        '...'
-                    ),
-                    _react2.default.createElement(
-                        'button',
-                        { type: 'submit', className: 'btn btn-success btn-lg' },
-                        'AddPlayers'
-                    )
-                ),
-                _react2.default.createElement('div', { id: 'CountDownPanel', className: 'pull-left timer' })
-            );
-        }
-    }]);
-
-    return Challenge;
-}(_react2.default.Component);
-
-exports.default = Challenge;
 
 },{"../actions/ChallengeActions":3,"../stores/ChallengeStore":17,"react":"react","react-webcam":38}],10:[function(require,module,exports){
 'use strict';
