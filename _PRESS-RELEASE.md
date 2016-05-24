@@ -1,5 +1,5 @@
 # Project Name #
-
+PowerHour
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
 
@@ -18,27 +18,44 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  - PowerHour
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  - Collaborate and plan out the greatest pub crawl of all time
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  - The product will allow users to create profiles based on their alcoholic preferences
+  - Users can host (create) events / paths that other users may request to join / follow
+  - Hosts can accept or deny if they deem the other worthy
+  - Users select what they will be bringing, thus the host has a collaborative list on the path page
+  - Quick, easy and organized way to plan alcoholic events
 
 ## Problem ##
   > Describe the problem your product solves.
+  - Solves the problem of finding people to party with if alone and wishing to go out
+  - Organized way to plan an event
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  - Hosts can create events
+  - Users can join events
+  - Hosts are able to filter users
+  - Both parties select what they are bringing to collaborate on supplies
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  - Always have a reason to go out
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  - Sign up and start finding paths now
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  - "Such a simple way to plan going out drinking with friends" 
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  - Sign up now.
