@@ -65,18 +65,18 @@ var AddChallengeActions = function () {
   function AddChallengeActions() {
     _classCallCheck(this, AddChallengeActions);
 
-    this.generateActions('addChallengeSuccess', 'addChallengeFail', 'updateName', 'updateDescription', 'updateImage');
+    this.generateActions('addChallengeSuccess', 'addChallengeFail', 'updateName', 'updateDescription', 'updateImage', 'updateShots', 'updateTime', 'updateTypeAlcohol');
   }
 
   _createClass(AddChallengeActions, [{
     key: 'addChallenge',
-    value: function addChallenge(name, description, image) {
+    value: function addChallenge(name, image, shots, time, typeAlcohol, description) {
       var _this = this;
 
       $.ajax({
         type: 'POST',
         url: '/api/challenges',
-        data: { name: name, description: description, image: image }
+        data: { name: name, image: image, shots: shots, time: time, typeAlcohol: typeAlcohol, description: description }
       }).done(function (data) {
         _this.actions.addChallengeSuccess(data.message);
       }).fail(function (data) {
@@ -120,6 +120,7 @@ var ChallengeActions = function () {
       var _this = this;
 
       console.log('THE CHALLENGE ID', challengeName);
+
       $.ajax({ url: '/api/challenges/' + challengeName }).done(function (data) {
         _this.actions.getChallengeSuccess(data);
       }).fail(function () {
@@ -459,6 +460,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var timerID;
 
+var x = {
+    'font-size': '35px'
+};
+
 var Challenge = function (_React$Component) {
     _inherits(Challenge, _React$Component);
 
@@ -498,7 +503,7 @@ var Challenge = function (_React$Component) {
         value: function handleClick(type) {
             if (type === 1) {
                 document.getElementById("CountDownPanel").style.visibility = "visible";
-                doStart();
+                doStart(Number(this.state.time) * 60);
             } else {
 
                 timerID.cancel();
@@ -533,7 +538,23 @@ var Challenge = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'h3',
-                        null,
+                        { style: x, className: 'test', id: 'test' },
+                        '  • ' + this.state.shots,
+                        ' Shots in ',
+                        this.state.time,
+                        ' minutes'
+                    ),
+                    _react2.default.createElement(
+                        'h3',
+                        { style: x, id: 'test' },
+                        ' • ',
+                        'Type Alcohol: ',
+                        this.state.typeAlcohol
+                    ),
+                    _react2.default.createElement(
+                        'h3',
+                        { style: x, id: 'test' },
+                        ' • ',
                         this.state.description
                     ),
                     _react2.default.createElement(
@@ -572,14 +593,16 @@ var Challenge = function (_React$Component) {
 
 exports.default = Challenge;
 
-////JS FIDDLE FOUND TIMER IMPLEMENTATION
+//////////////////////////////////////////
+//JS FIDDLE FOUND TIMER IMPLEMENTATION
+//////////////////////////////////////////
 
-var WARNING_THRESHOLD = 4 * 60 * 1000; //4 minutes (in milliseconds)
+var WARNING_THRESHOLD = 4 * 60 * 1000000; //4 minutes (in milliseconds)
 var _start = new Date().getTime();
 
-function doStart() {
+function doStart(time) {
     var id = "CountDownPanel";
-    var i = 10; //duration in seconds (10 minutes)
+    var i = time; //duration in seconds
     ActivateCountDown(id, i);
 }
 
@@ -670,6 +693,9 @@ function ATimer(milliseconds, optionalPeriod, optionalCallback, optionalUpdateCa
                 var curr = new Date().getTime();
                 var diff = curr - _start - count * period;
                 var remaining = Math.max(0, duration - (curr - _start));
+                if (Math.floor(remaining / 100 % 600 === 0)) {
+                    alert('SHOT!!!!'); //ALERTS OUT EVERY MINUTE TO CALL FOR A SHOT
+                }
                 timerInstance = window.setTimeout(chunkComplete, period - diff);
                 if (updater) updater.call(self, remaining); //do callback, if supplied
             }
@@ -777,11 +803,6 @@ var Home = function (_React$Component) {
                     null,
                     challenge.name
                   )
-                ),
-                _react2.default.createElement(
-                  'h4',
-                  null,
-                  challenge.description
                 )
               )
             )
@@ -1030,9 +1051,13 @@ var AddChallenge = function (_React$Component) {
       var name = this.state.name.trim();
       var description = this.state.description;
       var image = this.state.image;
-
-      if (name && description && image) {
-        _AddChallengeActions2.default.addChallenge(name, description, image);
+      var shots = this.state.shots;
+      var time = this.state.time;
+      var typeAlcohol = this.state.typeAlcohol;
+      console.log('here');
+      if (name && description && image && shots && time && typeAlcohol) {
+        console.log('adding?');
+        _AddChallengeActions2.default.addChallenge(name, image, shots, time, typeAlcohol, description);
       }
     }
   }, {
@@ -1072,7 +1097,28 @@ var AddChallenge = function (_React$Component) {
                   ),
                   _react2.default.createElement('input', { type: 'text', className: 'form-control', ref: 'nameTextField', value: this.state.name,
                     onChange: _AddChallengeActions2.default.updateName, autoFocus: true, required: true }),
-                  'Requirements:',
+                  _react2.default.createElement(
+                    'label',
+                    { className: 'control-label' },
+                    'Number of Shots'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', ref: 'nameTextField', value: this.state.shots,
+                    onChange: _AddChallengeActions2.default.updateShots, autoFocus: true, required: true }),
+                  _react2.default.createElement(
+                    'label',
+                    { className: 'control-label' },
+                    'Time Allowed (Mins)'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', ref: 'nameTextField', value: this.state.time,
+                    onChange: _AddChallengeActions2.default.updateTime, autoFocus: true, required: true }),
+                  _react2.default.createElement(
+                    'label',
+                    { className: 'control-label' },
+                    'Type of Alcohol'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', ref: 'nameTextField', value: this.state.typeAlcohol,
+                    onChange: _AddChallengeActions2.default.updateTypeAlcohol, autoFocus: true, required: true }),
+                  'Other:',
                   _react2.default.createElement('textarea', { className: 'form-control', rows: '4', ref: 'textAreaField', value: this.state.description,
                     onChange: _AddChallengeActions2.default.updateDescription, autoFocus: true, required: true }),
                   _react2.default.createElement(
@@ -1279,6 +1325,9 @@ var AddChallengeStore = function () {
     this.name = '';
     this.description = '';
     this.image = '';
+    this.shots = '';
+    this.time = '';
+    this.typeAlcohol = '';
   }
 
   _createClass(AddChallengeStore, [{
@@ -1286,6 +1335,7 @@ var AddChallengeStore = function () {
     value: function onAddChallengeSuccess(successMessage) {
       // this.nameValidationState = 'has-success';
       // this.helpBlock = successMessage;
+      alert('Success!');
     }
   }, {
     key: 'onAddChallengeFail',
@@ -1307,6 +1357,21 @@ var AddChallengeStore = function () {
     key: 'onUpdateImage',
     value: function onUpdateImage(event) {
       this.image = event.target.value;
+    }
+  }, {
+    key: 'onUpdateShots',
+    value: function onUpdateShots(event) {
+      this.shots = event.target.value;
+    }
+  }, {
+    key: 'onUpdateTime',
+    value: function onUpdateTime(event) {
+      this.time = event.target.value;
+    }
+  }, {
+    key: 'onUpdateTypeAlcohol',
+    value: function onUpdateTypeAlcohol(event) {
+      this.typeAlcohol = event.target.value;
     }
   }]);
 
@@ -1347,6 +1412,9 @@ var ChallengeStore = function () {
     this.name = '';
     this.description = '';
     this.image = '';
+    this.shots = '';
+    this.time = '';
+    this.typeAlcohol = '';
   }
 
   _createClass(ChallengeStore, [{
@@ -1403,10 +1471,7 @@ var HomeStore = function () {
     }
   }, {
     key: 'onGetChallengesFail',
-    value: function onGetChallengesFail(errorMessage) {
-      //toastr.error(errorMessage);
-
-    }
+    value: function onGetChallengesFail(errorMessage) {}
   }]);
 
   return HomeStore;

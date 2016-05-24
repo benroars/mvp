@@ -5,6 +5,10 @@ import Webcam from 'react-webcam';
 
 var timerID;
 
+var x = {
+  'font-size': '35px'
+}
+
 class Challenge extends React.Component {
   constructor(props) {
     super(props);
@@ -35,9 +39,9 @@ class Challenge extends React.Component {
   handleClick(type) {
     if(type === 1){ 
       document.getElementById("CountDownPanel").style.visibility = "visible";
-      doStart();
+      doStart(Number(this.state.time) * 60);
     } else {
-      
+
       timerID.cancel();
       alert('FAILURE');
     }
@@ -53,7 +57,9 @@ class Challenge extends React.Component {
           <Webcam className="cam pull-right" height="400" width="400"/>;
           <h3>{this.state.name}</h3>
           <div className="spacer">.</div>
-          <h3>{this.state.description}</h3>
+          <h3 style={x} className='test' id='test'>{'  \u2022 ' + this.state.shots} Shots in {this.state.time} minutes</h3>
+          <h3 style={x} id='test'>{' \u2022 '}Type Alcohol: {this.state.typeAlcohol}</h3>
+          <h3 style={x} id='test'>{' \u2022 '}{this.state.description}</h3>
           <button type='submit' className='btn btn-primary btn-lg' onClick={this.handleClick.bind(this, 1)}>Start</button>
           <span className='addwid'>...</span>
           <button type='submit' className='btn btn-danger btn-lg'  onClick={this.handleClick.bind(this, 2)}>Failure</button>
@@ -71,14 +77,15 @@ class Challenge extends React.Component {
 export default Challenge;
 
 
-////JS FIDDLE FOUND TIMER IMPLEMENTATION
-
-var WARNING_THRESHOLD = 4 * 60 * 1000; //4 minutes (in milliseconds)
+//////////////////////////////////////////
+//JS FIDDLE FOUND TIMER IMPLEMENTATION
+//////////////////////////////////////////
+var WARNING_THRESHOLD = 4 * 60 * 1000000; //4 minutes (in milliseconds)
 var start = new Date().getTime();
 
-function doStart() {
+function doStart(time) {
     var id = "CountDownPanel";
-    var i = 10; //duration in seconds (10 minutes)
+    var i = time; //duration in seconds
     ActivateCountDown(id, i);
 }
 
@@ -164,6 +171,9 @@ function ATimer(milliseconds, optionalPeriod, optionalCallback, optionalUpdateCa
             var curr = new Date().getTime();
             var diff = (curr - start) - (count * period);
             var remaining = Math.max(0, (duration - (curr - start)));
+            if(Math.floor(remaining / 100 % 600 === 0)) {
+              alert('SHOT!!!!'); //ALERTS OUT EVERY MINUTE TO CALL FOR A SHOT
+            } 
             timerInstance = window.setTimeout(chunkComplete, (period - diff));
             if (updater) updater.call(self, remaining); //do callback, if supplied
         }

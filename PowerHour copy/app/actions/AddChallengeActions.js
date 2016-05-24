@@ -7,15 +7,18 @@ class AddChallengeActions {
       'addChallengeFail',
       'updateName',
       'updateDescription',
-      'updateImage'
+      'updateImage',
+      'updateShots',
+      'updateTime',
+      'updateTypeAlcohol'
     );
   }
 
-  addChallenge(name, description, image) {
+  addChallenge(name, image, shots, time, typeAlcohol, description) {
     $.ajax({
       type: 'POST',
       url: '/api/challenges',
-      data: { name: name, description: description, image: image}
+      data: { name: name, image: image, shots: shots, time: time, typeAlcohol: typeAlcohol, description: description}
     })
       .done((data) => {
         this.actions.addChallengeSuccess(data.message);

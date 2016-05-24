@@ -10,6 +10,7 @@ class ChallengeActions {
 
   getChallenge(challengeName) {
     console.log('THE CHALLENGE ID', challengeName);
+    
     $.ajax({ url: '/api/challenges/' + challengeName})
       .done((data) => {
         this.actions.getChallengeSuccess(data);

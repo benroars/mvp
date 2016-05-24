@@ -12,7 +12,6 @@ class HomeStore {
   }
 
   onGetChallengesFail(errorMessage) {
-    //toastr.error(errorMessage);
 
   }
 

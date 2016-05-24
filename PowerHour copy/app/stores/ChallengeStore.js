@@ -1,4 +1,4 @@
-import {assign, contains} from 'underscore';
+import {assign} from 'underscore';
 import alt from '../alt';
 import ChallengeActions from '../actions/ChallengeActions';
 
@@ -9,6 +9,9 @@ class ChallengeStore {
     this.name = '';
     this.description = '';
     this.image = '';
+    this.shots = '';
+    this.time = '';
+    this.typeAlcohol = '';
   }
 
   onGetChallengeSuccess(data) {

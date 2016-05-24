@@ -27,9 +27,13 @@ class AddChallenge extends React.Component {
     var name = this.state.name.trim();
     var description = this.state.description;
     var image = this.state.image;
-
-    if (name && description && image) {
-      AddChallengeActions.addChallenge(name, description, image);
+    var shots = this.state.shots;
+    var time = this.state.time;
+    var typeAlcohol = this.state.typeAlcohol;
+    console.log('here');
+    if (name && description && image && shots && time && typeAlcohol) {
+      console.log('adding?');
+      AddChallengeActions.addChallenge(name, image, shots, time, typeAlcohol, description);
     }
   }
 
@@ -47,10 +51,21 @@ class AddChallenge extends React.Component {
                     <input type='text' className='form-control' ref='nameTextField' value={this.state.name}
                            onChange={AddChallengeActions.updateName} autoFocus required/>
                   
-                  Requirements:
+                    <label className='control-label'>Number of Shots</label>
+                    <input type='text' className='form-control' ref='nameTextField' value={this.state.shots}
+                           onChange={AddChallengeActions.updateShots} autoFocus required/>
+
+                    <label className='control-label'>Time Allowed (Mins)</label>
+                    <input type='text' className='form-control' ref='nameTextField' value={this.state.time}
+                           onChange={AddChallengeActions.updateTime} autoFocus required/>
+
+                    <label className='control-label'>Type of Alcohol</label>
+                    <input type='text' className='form-control' ref='nameTextField' value={this.state.typeAlcohol}
+                           onChange={AddChallengeActions.updateTypeAlcohol} autoFocus required/>
+                    Other:
                     <textarea className='form-control' rows='4' ref='textAreaField' value={this.state.description}
                       onChange={AddChallengeActions.updateDescription} autoFocus required/>
-                  
+
                   <label class="control-label">ImageURL:</label>
                   <input type="text" className='form-control' ref ='imageTextField' value={this.state.image}
                     onChange={AddChallengeActions.updateImage} autoFocus required/>

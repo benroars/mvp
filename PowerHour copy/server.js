@@ -22,7 +22,7 @@ var config = require('./config');
 
 mongoose.connect(config.database);
 mongoose.connection.on('error', function() {
-  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
+  console.info('Error: Could not connect to MongoDB');
 });
 
 var Character = require('./models/character');
@@ -69,8 +69,11 @@ app.post('/api/characters', function(req, res, next) {
 app.post('/api/challenges', function(req, res, next) {
 
   var name = req.body.name;
-  var des = req.body.description;
   var image = req.body.image;
+  var shots = req.body.shots;
+  var time = req.body.time;
+  var typeAlcohol = req.body.typeAlcohol;
+  var description = req.body.description
 
   Challenge.findOne({ name: name }, function(err, challenge) {
     if (err) return next(err);
@@ -81,8 +84,11 @@ app.post('/api/challenges', function(req, res, next) {
       var challenge = new Challenge({
         challengeId: Math.random(),
         name: name,
-        description: des,
-        image: image
+        image: image,
+        shots: shots,
+        time: time,
+        typeAlcohol: typeAlcohol,
+        description: description
       });
 
       challenge.save(function(err) {

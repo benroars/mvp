@@ -39,7 +39,7 @@ class Home extends React.Component {
             <div className='caption text-center' onClick={this.handleClick.bind(this, challenge)}>
               <h4>
                 <Link to={'/challenges/' + challenge.name}><strong>{challenge.name}</strong></Link>
-                <h4>{challenge.description}</h4>
+                
               </h4>
             </div>
           </div>

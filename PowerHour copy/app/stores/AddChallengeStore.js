@@ -7,11 +7,15 @@ class AddChallengeStore {
     this.name = '';
     this.description = '';
     this.image = '';
+    this.shots = '';
+    this.time = '';
+    this.typeAlcohol = '';
   }
 
   onAddChallengeSuccess(successMessage) {
     // this.nameValidationState = 'has-success';
     // this.helpBlock = successMessage;
+    alert('Success!');
   }
 
   onAddChallengeFail(errorMessage) {
@@ -29,6 +33,18 @@ class AddChallengeStore {
 
   onUpdateImage(event) {
     this.image = event.target.value;
+  }
+
+  onUpdateShots(event) {
+    this.shots = event.target.value;
+  }
+
+  onUpdateTime(event) {
+    this.time = event.target.value;
+  }
+
+  onUpdateTypeAlcohol(event) {
+    this.typeAlcohol = event.target.value;
   }
 }
 
