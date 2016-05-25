@@ -583,7 +583,8 @@ var Challenge = function (_React$Component) {
                         'AddPlayers'
                     )
                 ),
-                _react2.default.createElement('div', { id: 'CountDownPanel', className: 'pull-left timer' })
+                _react2.default.createElement('div', { id: 'CountDownPanel', className: 'pull-left timer' }),
+                _react2.default.createElement('audio', { src: 'moti.mp3', autoplay: true })
             );
         }
     }]);
@@ -1222,7 +1223,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //Notice it sets the routes component to app.
 
-//import Character from './components/Character';
 exports.default = _react2.default.createElement(
   _reactRouter.Route,
   { component: _App2.default },

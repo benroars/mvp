@@ -3,7 +3,6 @@ import {Route} from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import AddBro from './components/AddBro';
-//import Character from './components/Character';
 import AddChallenge from './components/addChallenge';
 import Challenge from './components/Challenge';
 //Notice it sets the routes component to app.

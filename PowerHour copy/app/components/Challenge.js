@@ -68,8 +68,8 @@ class Challenge extends React.Component {
         </div>
 
         <div id="CountDownPanel" className="pull-left timer"></div>
-       
-      </div>
+        <audio src="moti.mp3" autoplay></audio>
+        </div>
     );
   }
 }
