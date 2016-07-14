@@ -1,2 +1,1 @@
-#mvp
 POWER HOUR
